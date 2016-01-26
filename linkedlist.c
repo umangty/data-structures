@@ -101,6 +101,40 @@ void DeleteNthNode(struct Node *head, int position){
   free(fast);
 }
 
+// Reverse linked list.
+void ReverseList(struct Node *head){
+  struct Node *prev = NULL;
+  struct Node *current = head;
+  struct Node *next;
+  while (current != NULL){
+    next = current->next; 
+    current->next = prev; 
+    prev = current;
+    current = next;
+  }
+  head = prev;
+}
+
+// Get node value counting backward from tail.
+int GetNodeFromBack(struct Node *head, int position){
+  struct Node *slow = head;
+  struct Node *fast = head;
+  int index = 0;
+  while(index < position && fast != NULL){
+    fast = fast->next;
+    index++;
+  }
+  while(fast != NULL && slow != NULL){
+    fast = fast->next;
+    slow = slow->next;
+  }
+  return slow->data;
+}
+
+/* TODO: Code for removing duplicate nodes
+         Detecting cycle in the list
+         
+*/
 int main(int argc, char const *argv[])
 {
   /* code */
