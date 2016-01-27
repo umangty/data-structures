@@ -19,7 +19,8 @@ int Length(struct Node *head){
   }
   return count;
 }
-
+ 
+   
 // Prints data stored in the Linked List.
 void Print(struct Node *head){
   struct Node *current = head;
@@ -33,7 +34,7 @@ void Print(struct Node *head){
 // Method to insert a node at the beginning of the list.
 void InsertAtBegin(struct Node *head, int data){
   struct Node *current = head;
-  struct Node *newNode = (Node *)malloc(sizeof(Node));
+  struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
   newNode->data = data;
   newNode->next = current;
   head = newNode;
@@ -42,7 +43,7 @@ void InsertAtBegin(struct Node *head, int data){
 // Method to insert a node at last of the list.
 void InsertAtLast(struct Node *head, int data){
   struct Node *current = head;
-  struct Node *newNode = (Node *)malloc(sizeof(Node));
+  struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
   newNode->data = data;
   newNode->next = NULL;
   while(current != NULL){
@@ -55,7 +56,7 @@ void InsertAtLast(struct Node *head, int data){
 void InsertAtNth(struct Node *head, int data, int postion){
   struct Node *slow = head;
   struct Node *fast = head;
-  struct Node *newNode = (Node *)malloc(sizeof(Node));
+  struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
   newNode->data = data;
   newNode->next = NULL;
   int i = 0;
@@ -133,8 +134,12 @@ int GetNodeFromBack(struct Node *head, int position){
 
 /* TODO: Code for removing duplicate nodes
          Detecting cycle in the list
-         
+         *
 */
+
+
+
+
 int main(int argc, char const *argv[])
 {
   /* code */
