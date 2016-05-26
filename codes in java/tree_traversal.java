@@ -194,6 +194,48 @@ class tree_traversal{
 		}
 	}
 
+	// deleting a tree - post order traversal required.
+	public static void delete_tree(node root){
+		root = null;
+		// if(root == null) return;
+		// delete_tree(root.left);
+		// root.left = null;
+		// delete_tree(root.right);
+		// root.right = null;
+	}
+
+	// depth of binary tree- recur
+	public static int depth_recur(node root){
+		if(root == null) return 0;
+		int l = depth_recur(root.left);
+		int r = depth_recur(root.right);
+		return (l>r) ? (l+1) : (r+1);
+	}
+
+	// depth of a tree- iter : IMPORTANT
+	public static int depth_iter(node root){
+		if(root == null) return 0;
+		node temp = null;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		Q.add(null);
+		int depth = 1;
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp == null){
+				if(Q.size() != 0){
+					Q.add(null);
+					depth++;
+				}
+			}
+			else{
+				if(temp.left != null) Q.add(temp.left);
+				if(temp.right != null) Q.add(temp.right);
+			}
+		}
+		return depth;
+	}
+
     public static void main(String args[]) {
         node root = new node(1);
         node node2 = new node(2);
@@ -209,6 +251,6 @@ class tree_traversal{
 		node3.left = node6;
 		node3.right = node7;
 		insert(root, 8);
-		level_order_reverse(root);
+		System.out.println(depth_iter(root));
     }
 }
