@@ -151,6 +151,31 @@ class tree_traversal{
 		} 
 	}
 
+	// finding size of tree - recursive.
+	public static int size_recur(node root){
+		return (root==null) ? 0 : (size_recur(root.left) + 1 + size_recur(root.right));
+	}
+
+	// finding size of tree - iterative.
+	public static int size_iter(node root){
+		node temp = null;
+		if(root == null) return 0;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		int size = 0;
+		while(Q.size() != 0){
+			temp = Q.remove();
+			size++;
+			if(temp.left != null){
+				Q.add(temp.left);
+			}
+			if(temp.right != null){
+				Q.add(temp.right);
+			}
+		}
+		return size;
+	} 
+
     public static void main(String args[]) {
         node root = new node(1);
         node node2 = new node(2);
@@ -166,6 +191,6 @@ class tree_traversal{
 		node3.left = node6;
 		node3.right = node7;
 		insert(root, 8);
-		level_order(root);
+		System.out.println(size_iter(root));
     }
 }
