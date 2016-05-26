@@ -11,7 +11,6 @@ class node{
 }
 
 class tree_traversal{
-
 	// iterative implementation
 	public static void pre_order(node root){
 		Stack<node> S = new Stack<node>();
@@ -69,6 +68,35 @@ class tree_traversal{
 		return count; 
 	}
 
+	public static int num_of_fullnodes(node root){
+		node temp;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		int count=0;
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp.left!=null && temp.right!=null) count++;
+			if(temp.left != null) Q.add(temp.left);
+			if(temp.right != null) Q.add(temp.right);
+		}
+		return count; 
+	}
+
+	public static int num_of_halfnodes(node root){
+		node temp;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		int count=0;
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp.left!=null^temp.right!=null) count++;
+			if(temp.left != null) Q.add(temp.left);
+			if(temp.right != null) Q.add(temp.right);
+		}
+		return count; 
+	}
+
+
     public static void main(String args[]) {
         node root = new node(1);
         node node2 = new node(2);
@@ -84,6 +112,6 @@ class tree_traversal{
 		node3.left = node6;
 		node3.right = node7;
 		level_order(root);
-		System.out.println(num_of_leaves(root));
+		System.out.println(num_of_halfnodes(root));
     }
 }
