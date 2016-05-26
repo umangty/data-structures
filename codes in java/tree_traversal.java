@@ -176,6 +176,24 @@ class tree_traversal{
 		return size;
 	} 
 
+	// printing level order traversal in reverse order.
+	public static void level_order_reverse(node root){
+		node temp = null;
+		Queue<node> Q = new LinkedList<node>();
+		Stack<node> S = new Stack<node>();
+		Q.add(root);
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp.left != null) Q.add(temp.left);
+			if(temp.right != null) Q.add(temp.right);
+			S.push(temp);
+		}
+		while(S.size() != 0){
+			node n = S.pop();
+			System.out.println(n.data);
+		}
+	}
+
     public static void main(String args[]) {
         node root = new node(1);
         node node2 = new node(2);
@@ -191,6 +209,6 @@ class tree_traversal{
 		node3.left = node6;
 		node3.right = node7;
 		insert(root, 8);
-		System.out.println(size_iter(root));
+		level_order_reverse(root);
     }
 }
