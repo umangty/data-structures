@@ -96,6 +96,60 @@ class tree_traversal{
 		return count; 
 	}
 
+	// searching element in tree - recusive version.
+	public static int find_recur(node root, int data){
+		if(root == null) return 0;
+		else{
+			if(data == root.data) return 1;
+			else{
+				int temp = find_recur(root.left, data);
+				if(temp == 1) return temp;
+				else return find_recur(root.right, data);
+			}
+		}
+	}
+
+	// searching element in tree - iterative version.
+	public static int find_iter(node root, int data){
+		node temp = null;
+		int result = 0;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp.data == data){
+				result = 1;
+				break;
+			}
+			if(temp.left != null) Q.add(temp.left);
+			if(temp.right != null) Q.add(temp.right);
+		}
+		return result;
+	}
+
+	// inserting an element into tree.
+	public static void insert(node root, int data){
+		node n = new node(data);
+		if(root == null){
+			root = n;
+			return;
+		}
+		node temp = null;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp.left != null) Q.add(temp.left);
+			else{
+				temp.left = n;
+				return;
+			}
+			if(temp.right != null) Q.add(temp.right);
+			else{
+				temp.right = n;
+			}
+		} 
+	}
 
     public static void main(String args[]) {
         node root = new node(1);
@@ -111,7 +165,7 @@ class tree_traversal{
 		node2.right = node5;
 		node3.left = node6;
 		node3.right = node7;
+		insert(root, 8);
 		level_order(root);
-		System.out.println(num_of_halfnodes(root));
     }
 }
