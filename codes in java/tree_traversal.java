@@ -236,6 +236,86 @@ class tree_traversal{
 		return depth;
 	}
 
+	// deepest node.
+	public static node deepest_node(node root){
+		node temp = null;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp.left != null) Q.add(temp.left);
+			if(temp.right != null) Q.add(temp.right);
+		}
+		return temp;
+	}
+
+	// public static void delete_node(node root, node to_delete){
+	// 	node deepest = deepest_node(root);
+	// 	int temp = deepest.data;
+	// 	deepest.data = to_delete.data;
+	// 	to_delete.data = temp;
+	// 	deepest = null; 
+	// }
+
+	// Code to find the level with maximum sum.
+	public static int level_with_max_sum(node root){
+		if(root == null) return 0;
+		node temp = null;
+		Queue<node> Q = new LinkedList<node>();
+		Q.add(root);
+		Q.add(null);
+		int max_sum = 0;
+		int sum = 0;
+		while(Q.size() != 0){
+			temp = Q.remove();
+			if(temp == null){
+				if(sum > max_sum){
+					max_sum = sum;
+				}
+				sum = 0;
+				if(Q.size() != 0) Q.add(null);
+			}
+			else{
+				sum += temp.data;
+				if(temp.left != null) Q.add(temp.left);
+				if(temp.right != null) Q.add(temp.right);
+			}
+		}
+		return max_sum;
+	}
+
+	// sum of all elements in tree.
+	public static int sum_recur(node root){
+		if(root == null) return 0;
+		return root.data + sum_recur(root.left) + sum_recur(root.right);
+	}
+
+	public static int sum_iter(node root){
+		if(root == null) return 0;
+		Queue<node> Q = new LinkedList<node>();
+		node temp = null;
+		Q.add(root);
+		int sum = 0;
+		while(Q.size() != 0){
+			temp = Q.remove();
+			sum += temp.data;
+			if(temp.left != null) Q.add(temp.left);
+			if(temp.right != null) Q.add(temp.right);
+		}
+		return sum;
+	}
+
+	public static node mirror_image(node root){
+		if(root != null){
+			mirror_image(root.left);
+			mirror_image(root.right);
+			node temp = root.left;
+			root.left = root.right;
+			root.right = temp;
+		}
+		return root;
+	}
+
     public static void main(String args[]) {
         node root = new node(1);
         node node2 = new node(2);
@@ -251,6 +331,6 @@ class tree_traversal{
 		node3.left = node6;
 		node3.right = node7;
 		insert(root, 8);
-		System.out.println(depth_iter(root));
+		level_order(mirror_image(root));
     }
 }
